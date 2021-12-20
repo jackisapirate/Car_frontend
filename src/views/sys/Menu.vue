@@ -95,9 +95,9 @@
           prop="operation"
           label="Operation">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" circle @click="editHandle(scope.row.id)"></el-button>
+          <el-button type="primary" icon="el-icon-edit" circle @click="editHandle(scope.row.id)"  v-if="hasAuth('sys:menu:update')"></el-button>
           <el-popconfirm title="Are you sure to delete?" @confirm="delHandel(scope.row.id)">
-            <el-button type="danger" slot="reference"  icon="el-icon-delete" circle></el-button>
+            <el-button type="danger" slot="reference"  icon="el-icon-delete" circle  v-if="hasAuth('sys:menu:delete')"></el-button>
           </el-popconfirm>
         </template>
       </el-table-column>
