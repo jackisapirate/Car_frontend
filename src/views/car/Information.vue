@@ -34,7 +34,7 @@
                 v-for="item in options"
                 :key="item.id"
                 :label="item.name"
-                :value="item.name">
+                :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
@@ -265,12 +265,12 @@ export default {
             }
           }).then(res => {
         console.log(res.data.data)
-        this.options = res.data.data.carModelList;
-        if(res.data.data.carInformationPage != []){
-          this.currentPage = res.data.data.carInformationPage.current;
-          this.size = res.data.data.carInformationPage.size;
-          this.total = res.data.data.carInformationPage.total;
-          this.tableData = res.data.data.carInformationPage.records;
+        this.options = res.data.data.allModel;
+        if(res.data.data.carInformationDto != []){
+          this.currentPage = res.data.data.carInformationDto.current;
+          this.size = res.data.data.carInformationDto.size;
+          this.total = res.data.data.carInformationDto.total;
+          this.tableData = res.data.data.carInformationDto.records;
         }
       })
     },

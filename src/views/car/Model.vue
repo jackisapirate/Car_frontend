@@ -158,11 +158,11 @@ export default {
             }
           }).then(res => {
         console.log(res.data.data)
-        this.currentPage = res.data.data.carModelPage.current;
-        this.size = res.data.data.carModelPage.size;
-        this.total = res.data.data.carModelPage.total;
-        this.tableData = res.data.data.carModelPage.records;
-        this.options = res.data.data.carMakeList;
+        this.currentPage = res.data.data.pageCarModelDto.current;
+        this.size = res.data.data.pageCarModelDto.size;
+        this.total = res.data.data.pageCarModelDto.total;
+        this.tableData = res.data.data.pageCarModelDto.records;
+        this.options = res.data.data.allMake;
       })
     },
     submitForm(editForm) {

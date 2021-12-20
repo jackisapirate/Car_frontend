@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Welcome!</h1>
-    <h3>You could click the Dropdown on your upper left to switch the route.</h3>
+    <h3>You could click the Dropdown Menus on your upper left to switch the route.</h3>
     <div class="grid-content bg-purple">
 
       <el-image

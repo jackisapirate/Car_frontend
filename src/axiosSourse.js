@@ -4,7 +4,8 @@ import Element from "element-ui";
 
 // Define a domain name + port, here is a cross-domain problem during development, don’t let go
 // 54.219.47.84
-axios.defaults.baseURL = "http://54.219.47.84:8081"
+// axios.defaults.baseURL = "http://54.219.47.84:8081"
+axios.defaults.baseURL = "http://localhost:8081"
 const request = axios.create({
     timeout: 5000,
     headers: {

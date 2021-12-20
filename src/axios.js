@@ -3,7 +3,8 @@ import router from "@/router";
 import Element from "element-ui";
 
 // http://54.219.47.84/
-axios.defaults.baseURL = "http://54.219.47.84:8081"
+// axios.defaults.baseURL = "http://54.219.47.84:8081"
+axios.defaults.baseURL = "http://localhost:8081"
 const request = axios.create({
     timeout: 5000,
     headers: {
