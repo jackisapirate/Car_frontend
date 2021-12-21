@@ -102,6 +102,39 @@
       </el-form>
     </el-dialog>
 
+    <!--show-->
+    <el-dialog
+        :visible.sync="this.showFlag"
+        width="80%"
+        :before-close="showhandleClose">
+
+      <el-descriptions title="Car Detail Information">
+        <el-descriptions-item label="Car Name" >{{this.showForm.carInformation.name}}</el-descriptions-item>
+        <el-descriptions-item label="Model Name">{{this.showForm.carModel.name}}</el-descriptions-item>
+        <el-descriptions-item label="Make Name">{{this.showForm.carMake.name}}</el-descriptions-item>
+        <el-descriptions-item label="Year">{{this.showForm.carInformation.year}}</el-descriptions-item>
+        <el-descriptions-item label="Price">{{this.showForm.carInformation.price}}
+        </el-descriptions-item>
+        <el-descriptions-item label="Mileage">
+          {{this.showForm.carInformation.mileage}}
+        </el-descriptions-item>
+        <el-descriptions-item label="Body Style">{{this.showForm.carInformation.bodyStyle}}</el-descriptions-item>
+        <el-descriptions-item label="Color">{{this.showForm.carInformation.color}}</el-descriptions-item>
+        <el-descriptions-item label="Transmission">{{this.showForm.carInformation.transmission}}</el-descriptions-item>
+        <el-descriptions-item label="Engine Type">{{this.showForm.carInformation.engineType}}</el-descriptions-item>
+        <el-descriptions-item label="Description" >{{this.showForm.carInformation.description}}</el-descriptions-item>
+        <el-descriptions-item label="Make Country">{{this.showForm.carMake.country}}</el-descriptions-item>
+
+        <el-descriptions-item label="Make Detail">{{this.showForm.carMake.description}}</el-descriptions-item>
+
+      </el-descriptions>
+
+
+      <span slot="footer" class="dialog-footer">
+        <el-button  type="primary" @click="showFlag = false">Confirm</el-button>
+      </span>
+    </el-dialog>
+
     <el-table
         border
         stripe
@@ -168,6 +201,8 @@
           <el-popconfirm title="Do you want to delete this item?" @confirm="delHandel(scope.row.id)" v-if="hasAuth('car:information:delete')">
             <el-button type="danger" icon="el-icon-delete" circle slot="reference"></el-button>
           </el-popconfirm>
+          -
+          <el-button type="text" @click="detailHandel(scope.row.id)" v-if="hasAuth('car:information:list')">Detail</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -237,6 +272,18 @@ export default {
           return time.getTime() > Date.now() - 8.64e6
         }
       },
+      showForm: {
+        carInformation: {
+
+        },
+        carModel: {
+
+        },
+        carMake: {
+
+        }
+      },
+      showFlag: false,
     }
   },
   methods: {
@@ -320,6 +367,13 @@ export default {
         });
       })
     },
+    detailHandel(id){
+      this.$axios.post('/car/information/showDetail/' + id).then(res => {
+        this.showForm = res.data.data;
+        console.log(this.showForm.carInformation.name);
+        this.showFlag = true;
+      })
+    },
     handleSelectionChange(val) {
       this.multipleSelection = val;
       this.delBtlStatu = val.length == 0;
@@ -336,6 +390,9 @@ export default {
     disabledDate(time) {
       return time.getTime() > Date.now();
     },
+    showhandleClose(){
+      this.showFlag = false;
+    }
   },
   created() {
     this.getCarInformationList();
